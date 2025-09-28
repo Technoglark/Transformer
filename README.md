@@ -1,5 +1,5 @@
 # Transformer
-### This project implements very popular architecture which is widely distributed - Transformer with Multi-head attention mechanism.
+### This project implements very popular architecture which is widely used - Transformer with Multi-head attention mechanism.
 
 ![](images/img1.png)
 
@@ -9,4 +9,9 @@
 - 6 layers of decoder
 - Three hundred dimensional word2vec embeddings
 
-  $Wx+b -> ReLU -> Wx+b$
+## Feed-forward architecture
+This layer may be implemented in different ways depending on model and task. In my implementation it consists of two linear layers and ReLU activation between them.
+
+$$\huge x \Rightarrow y = W_1x + b_1 \Rightarrow z = W_2y + b_2 \Rightarrow z$$
+
+![](images/img2.png)
