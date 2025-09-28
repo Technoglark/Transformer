@@ -4,20 +4,14 @@ import re
 
 
 def tokenize_text(text, type: str):
-    """
-    Компактная версия токенизатора
-    """
     text = text.replace('<QCT>', ' ___QCT___ ')
-    
-    # Находим все токены: слова, числа, знаки препинания
     tokens = re.findall(r'\w+(?:\'\w+)?|\d+\.?\d*|\.\.\.|[^\w\s]', text)
     
-    # Обрабатываем токены
     processed = []
     if type == 'answer':
         processed.append('<SOS>')
     for token in tokens:
-        if re.match(r'^[a-zA-Z]', token):  # если начинается с буквы
+        if re.match(r'^[a-zA-Z]', token):
             processed.append(token.lower())
         elif token == '___QCT___':
             processed.append('<QCT>')
@@ -65,12 +59,12 @@ import re
 
 def to_dict(text_set: str) -> dict:
     result = {}
-    
-    # Находим все пары вопрос-ответ
+
     pattern = r'"Question" -> "([^"]+)".*?"Answers" -> {"([^"]+)"}'
     matches = re.findall(pattern, text_set, re.DOTALL)
     
     for question, answer in matches:
         result[question] = answer
     
+
     return result
