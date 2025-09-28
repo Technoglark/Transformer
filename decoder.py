@@ -29,10 +29,10 @@ class DecoderLayer(nn.Module):
         
         input_mask = input_mask.unsqueeze(1).unsqueeze(2)
 
-        if combined_mask.dim() == 2: # Если пришла [L, L]
-            combined_mask = combined_mask.unsqueeze(0).unsqueeze(1) # -> [1, 1, L, L]
-        elif combined_mask.dim() == 3: # Если пришла [B, L, L]
-            combined_mask = combined_mask.unsqueeze(1) # -> [B, 1, L, L]
+        if combined_mask.dim() == 2:
+            combined_mask = combined_mask.unsqueeze(0).unsqueeze(1)
+        elif combined_mask.dim() == 3:
+            combined_mask = combined_mask.unsqueeze(1)
         else:
             combined_mask = combined_mask
 
@@ -67,3 +67,4 @@ class Decoder(nn.Module):
             x = layer(x, encoder_outs, input_mask, combined_mask)
 
         return self.linear(x)
+
